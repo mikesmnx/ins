@@ -1,0 +1,11 @@
+<h1 mat-dialog-title>Edit Data</h1>
+
+<mat-dialog-content class="modal-view-container">
+    <ng-container *ngFor="let dbItem of data.selection">
+        <app-employee-detail [employeeData]="dbItem"></app-employee-detail>
+    </ng-container>
+</mat-dialog-content>
+
+<mat-dialog-actions class="modal-footer">
+    <button mat-button [mat-dialog-close]="data.selection">Close</button>
+</mat-dialog-actions>

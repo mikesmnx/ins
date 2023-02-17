@@ -1,0 +1,46 @@
+.shift-editor {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    padding: 1rem;
+    gap: 10px;
+
+    &__time {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    &__details {
+        width: 230px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 5px;
+        
+        div {
+            text-align: center;
+            background-color: #f0f0f0;
+            border-radius: 3px;
+            border: 1px solid #b0b0b0;
+            padding-left: 15px;
+            padding-right: 15px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            width: 120px;
+
+            span {
+                font-size: 75%;
+                color: #999;
+            }
+        }
+    }
+
+    &__edit-form {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+        min-width: 500px;
+    }
+}

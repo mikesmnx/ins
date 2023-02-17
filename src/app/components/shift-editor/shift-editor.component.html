@@ -1,0 +1,35 @@
+<div class="shift-editor">
+    <div class="shift-editor__time">
+        <div class="shift-editor__details">
+            <div>
+                {{ shift.clockIn | date:'shortTime' }}<br />
+                <span>
+                    {{ shift.clockIn | date:'shortDate' }}
+                </span>
+            </div> &mdash;
+            <div>
+                {{ shift.clockOut | date:'shortTime' }}<br />
+                <span>
+                    {{ shift.clockOut | date:'shortDate' }}
+                </span>
+            </div>
+        </div>
+        <button mat-icon-button color="primary" (click)="toggleEdit()">
+            <mat-icon>
+                edit
+            </mat-icon>
+        </button>
+    </div>
+
+    <div class="shift-editor__edit-form" *ngIf="editMode">
+        <app-time-editor [baseDate]="baseDate" [timestamp]="shift.clockIn" [allowPrevDay]="true"
+            [maxValue]="shift.clockOut" (timeChangedEvent)="setNewTimestamp('clockIn', $event)"></app-time-editor>
+
+        <app-time-editor [baseDate]="baseDate" [timestamp]="shift.clockOut" [allowNextDay]="true"
+            [minValue]="shift.clockIn" (timeChangedEvent)="setNewTimestamp('clockOut', $event)"></app-time-editor>
+
+        <button *ngIf="editMode" [disabled]="shiftStart > shiftEnd" mat-raised-button color="basic" (click)="applyChanges()">
+            Apply
+        </button>
+    </div>
+</div>

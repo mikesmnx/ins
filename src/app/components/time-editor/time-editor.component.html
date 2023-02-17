@@ -1,0 +1,23 @@
+<div class="time-editor">
+    <form [formGroup]="timeEditForm">
+        <mat-form-field class="time-editor__input">
+            <input matInput type="text" formControlName="selectedTime">
+        </mat-form-field>
+
+        <ng-container *ngIf="allowPrevDay">
+            <div *ngIf="otherDay.value" class="time-editor__warning">
+                Shift started <strong>{{ currentDay | date:'shortDate' }}</strong>
+            </div>
+    
+            <mat-checkbox formControlName="otherDay">Started the previous day</mat-checkbox>
+        </ng-container>
+
+        <ng-container *ngIf="allowNextDay">
+            <div *ngIf="otherDay.value" class="time-editor__warning">
+                Shift ended <strong>{{ currentDay | date:'shortDate' }}</strong>
+            </div>
+    
+            <mat-checkbox formControlName="otherDay">Ended the next day</mat-checkbox>
+        </ng-container>
+    </form>
+</div>

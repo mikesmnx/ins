@@ -1,0 +1,68 @@
+<div class="dashboard">
+    Total Number of Employees: <strong>{{ employees.length }}</strong><br />
+    Their total Clocked in time {{ totalClockedInTime | number: '1.0-2' }} hr<br />
+    The total amount paid for regular hours {{ totalRegularTime | currency }} <br />
+    The total overtime amount paid for overtime hours {{ totalOverTime | currency }} <br />
+
+    <section class="table-container">
+        <table mat-table [dataSource]="employees">
+            <ng-container matColumnDef="select">
+                <th mat-header-cell *matHeaderCellDef>
+                    Select for Bulk Edit
+                </th>
+                <td mat-cell *matCellDef="let row">
+                    <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+                        [checked]="selection.isSelected(row)">
+                    </mat-checkbox>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="position">
+                <th mat-header-cell *matHeaderCellDef> No. </th>
+                <td mat-cell *matCellDef="let shift; let i = index"> {{ i + 1 }} </td>
+            </ng-container>
+    
+            <ng-container matColumnDef="employee">
+                <th mat-header-cell *matHeaderCellDef> Employee </th>
+                <td mat-cell *matCellDef="let employee">
+                    {{ employee.name }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="email">
+                <th mat-header-cell *matHeaderCellDef> Email </th>
+                <td mat-cell *matCellDef="let employee">
+                    {{ employee.email }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="total">
+                <th mat-header-cell *matHeaderCellDef> Clocked Time, h </th>
+                <td mat-cell *matCellDef="let employee">
+                    {{ (employee.regularTime + employee.overTime) | number: '1.0-2' }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="regular">
+                <th mat-header-cell *matHeaderCellDef> Paid for Regular Hours, $ </th>
+                <td mat-cell *matCellDef="let employee">
+                    {{ employee.regularTime * employee.hourlyRate | number: '1.0-2' }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="overtime">
+                <th mat-header-cell *matHeaderCellDef> Paid for Overtime Hours, $ </th>
+                <td mat-cell *matCellDef="let employee">
+                    {{ employee.overTime * employee.hourlyRateOvertime | number: '1.0-2' }}
+                </td>
+            </ng-container>
+    
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+    </section>
+
+    <button [disabled]="!selection.selected.length" mat-raised-button color="primary" (click)="bulkEdit()" class="btn-edit">
+        Bulk Edit ({{ selection.selected.length }})
+    </button>
+</div>

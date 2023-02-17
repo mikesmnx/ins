@@ -1,0 +1,15 @@
+.time-editor {
+    &__input {
+        width: 220px;
+    }
+
+    &__warning {
+        font-size: 90%;
+        font-style: italic;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+    }
+}

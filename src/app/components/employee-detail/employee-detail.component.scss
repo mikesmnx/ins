@@ -1,0 +1,38 @@
+.table-container {
+    height: 400px;
+    overflow: auto;
+}
+
+.shift-duration {
+    span {
+        font-size: 90%;
+        font-style: italic;
+    }
+}
+
+.mat-column-position {
+    flex: 0 0 50px;
+    width: 50px;
+}
+
+.mat-column-shiftlen {
+    flex: 0 0 150px;
+    width: 150px;
+}
+
+.employee-form {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.date-container {
+    text-align: right;
+    margin-top: 25px;
+}
+
+hr {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
