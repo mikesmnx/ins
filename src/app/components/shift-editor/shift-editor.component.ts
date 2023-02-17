@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { Shift } from 'src/app/models/shift';
 
 @Component({
@@ -27,8 +34,7 @@ export class ShiftEditorComponent implements OnInit {
   setNewTimestamp(prop: 'clockIn' | 'clockOut', timestamp: number): void {
     if (prop === 'clockIn') {
       this.shiftStart = timestamp;
-    }
-    else if (prop === 'clockOut') {
+    } else if (prop === 'clockOut') {
       this.shiftEnd = timestamp;
     }
   }

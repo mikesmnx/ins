@@ -60,7 +60,7 @@ export class DataService {
 
   public getEmployee(id: string): DbItem {
     const employee = this.db.get(id);
-    
+
     if (!employee) {
       throw Error('db error');
     }
@@ -84,7 +84,9 @@ export class DataService {
       const totalTimeByDays = new Map<string, number>();
 
       dbItem.shifts.forEach((shift) => {
-        totalTime += TimeHelper.getHoursFromMsec((shift.clockOut - shift.clockIn));
+        totalTime += TimeHelper.getHoursFromMsec(
+          shift.clockOut - shift.clockIn
+        );
 
         const startDay = TimeHelper.getDate(shift.clockIn);
         const endDay = TimeHelper.getDate(shift.clockOut);

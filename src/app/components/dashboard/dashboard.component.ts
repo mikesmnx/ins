@@ -4,9 +4,11 @@ import {
   Component,
   OnInit,
   ChangeDetectorRef,
+  OnDestroy,
 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { filter, tap } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { filter, takeUntil, tap } from 'rxjs/operators';
 import { DbItem } from 'src/app/models/db.item';
 import { DurationType } from 'src/app/models/duration-type';
 import { Employee, EmployeeDetail } from 'src/app/models/employee';
@@ -19,7 +21,7 @@ import { ModalViewComponent } from '../modal-view/modal-view.component';
   styleUrls: ['./dashboard.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
   public db: Map<string, DbItem> = new Map();
 
   public employees: EmployeeDetail[] = [];
@@ -39,7 +41,10 @@ export class DashboardComponent implements OnInit {
     'regular',
     'overtime',
   ];
+
   public selection = new SelectionModel<Employee>(true, []);
+
+  private destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
     private dialog: MatDialog,
@@ -53,11 +58,15 @@ export class DashboardComponent implements OnInit {
     this.employees = this.dataService.getEmployeeNames();
 
     this.dataService.totalTime$
-      .pipe(tap((time) => (this.totalClockedInTime = time)))
+      .pipe(
+        takeUntil(this.destroy$),
+        tap((time) => (this.totalClockedInTime = time))
+      )
       .subscribe();
 
     this.dataService.paidRegularTime$
       .pipe(
+        takeUntil(this.destroy$),
         tap((time) => {
           this.totalRegularTime = time;
         })
@@ -65,7 +74,10 @@ export class DashboardComponent implements OnInit {
       .subscribe();
 
     this.dataService.paidOverTime$
-      .pipe(tap((time) => (this.totalOverTime = time)))
+      .pipe(
+        takeUntil(this.destroy$),
+        tap((time) => (this.totalOverTime = time))
+      )
       .subscribe();
   }
 
@@ -91,10 +103,15 @@ export class DashboardComponent implements OnInit {
         });
 
         this.dataService.getDbStats();
-        
+
         this.employees = this.dataService.getEmployeeNames();
 
         this.ref.detectChanges();
       });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
   }
 }
