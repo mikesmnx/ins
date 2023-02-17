@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { TimeHelper } from '../helpers/time.helpes';
+import { TimeHelper } from '../helpers/time.helper';
 import { DbItem } from '../models/db.item';
 import { Employee, EmployeeDetail } from '../models/employee';
 import { Shift } from '../models/shift';
@@ -126,7 +126,7 @@ export class DataService {
       totalTimeByDays.forEach((dayTime) => {
         if (dayTime > overTimeLimit) {
           overTime += TimeHelper.getHoursFromMsec(dayTime - overTimeLimit);
-          regularTime = TimeHelper.getHoursFromMsec(overTimeLimit);
+          regularTime += TimeHelper.getHoursFromMsec(overTimeLimit);
         } else {
           regularTime += TimeHelper.getHoursFromMsec(dayTime);
         }

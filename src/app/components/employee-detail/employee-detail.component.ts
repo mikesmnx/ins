@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { TimeHelper } from 'src/app/helpers/time.helpes';
+import { TimeHelper } from 'src/app/helpers/time.helper';
 import { DbItem } from 'src/app/models/db.item';
 import { DurationType } from 'src/app/models/duration-type';
 import { Shift } from 'src/app/models/shift';

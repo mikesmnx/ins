@@ -6,7 +6,7 @@ export class TimeHelper {
     }
 
     public static getDate(timestamp: number): string {
-        return moment(timestamp).format('DD.MM.YYYY');
+        return moment(timestamp).format('MM/DD/YYYY');
     }
 
     public static getStartDayTimestamp(timestamp: number, dayDiff = 0): number {

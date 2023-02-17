@@ -10,7 +10,7 @@ import {
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { distinctUntilChanged, Subscription } from 'rxjs';
 import { combineLatest } from 'rxjs';
-import { TimeHelper } from 'src/app/helpers/time.helpes';
+import { TimeHelper } from 'src/app/helpers/time.helper';
 
 @Component({
   selector: 'app-time-editor',
