@@ -39,7 +39,7 @@ export class DataService {
       });
     });
 
-    shifts.forEach((shift, i) => {
+    shifts.forEach((shift) => {
       const employee = this.db.get(shift.employeeId);
 
       employee?.shifts.set(shift.id, shift);

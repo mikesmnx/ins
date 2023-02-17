@@ -6,7 +6,7 @@
 
         <ng-container *ngIf="allowPrevDay">
             <div *ngIf="otherDay.value" class="time-editor__warning">
-                Shift started <strong>{{ currentDay | date:'shortDate' }}</strong>
+                Shift started <strong>{{ currentDay }}</strong>
             </div>
     
             <mat-checkbox formControlName="otherDay">Started the previous day</mat-checkbox>
@@ -14,7 +14,7 @@
 
         <ng-container *ngIf="allowNextDay">
             <div *ngIf="otherDay.value" class="time-editor__warning">
-                Shift ended <strong>{{ currentDay | date:'shortDate' }}</strong>
+                Shift ended <strong>{{ currentDay }}</strong>
             </div>
     
             <mat-checkbox formControlName="otherDay">Ended the next day</mat-checkbox>
